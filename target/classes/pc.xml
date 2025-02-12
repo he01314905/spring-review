@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+<!--     頭部添加p命名空間 xmlns:p bean改成p  也是基於set方法-->
+<!-- <bean id="dogBean" class="com.example.bean.Dog" p:name="小黃" p:age="3" p:birth="Wed Feb 12 19:55:23 CST 2025"></bean> -->
+
+<bean id="dogBean" class="com.example.bean.Dog" p:name="小黃" p:age="3" p:birth-ref="birthBean"></bean>
+	<bean id="birthBean" class="java.util.Date"/>
+	
+	<bean id="people" class="com.example.bean.People" c:_0="小明" c:age="20" c:sex="1"></bean>
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<bean id="gunFactory" class="com.factorybean.beans.GunFactory"/>
+	<bean id="gun" factory-bean="gunFactory" factory-method="get"></bean>
+
+<!-- 工廠方法模式 實作FactoryBean 不用再寫factory-bean 跟 method -->
+	<bean id="person" class="com.factorybean.beans.PersonFactoryBean"/>
+	
+	<bean id="student" class="com.factorybean.beans.Student">
+<!-- 	<property name="birth" value="Wed Feb 12 19:06:23 CST 2025"/> -->
+	<property name="birth" ref="date"></property>
+	</bean>
+	
+	<bean id="date" class="com.factorybean.beans.DateFactoryBean">
+	<constructor-arg index="0" value="1980-09-11"/>
+	</bean>
+	
+	
+	
+	
+</beans>

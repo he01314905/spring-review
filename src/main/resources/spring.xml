@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <!-- 这里定义你的 beans -->
+	<bean id="user" class="com.spring.beans.User"/>
+	<bean id="emp" class="com.spring.beans.Emp">
+		<constructor-arg name="user" ref="user"></constructor-arg>
+	</bean>
+	
+<!-- 	外部bean -->
+	<bean id="orderDaoBean" class="com.spring.beans.OrderDao"/>
+	<bean id="orderService" class="com.spring.beans.OrderService">
+		<property name="orderDao" ref="orderDaoBean"></property>
+	</bean>
+	
+<!-- 	內部bean -->
+	<bean id="orderService2" class="com.spring.beans.OrderService">
+		<property name="orderDao">
+			<bean class="com.spring.beans.OrderDao"></bean>
+		</property>
+	</bean>
+	
+	
+</beans>

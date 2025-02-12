@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+
+<bean id="mathBean" class="com.example.bean.MathBean">
+<!--第一種方法寫特殊符號<property name="result" value="2 &lt; 3"></property>-->
+ <property name="result">
+ <value><![CDATA[2 < 3]]></value>
+ </property> 
+
+</bean>
+    <!-- 这里定义你的 beans -->
+	<bean id="studentBean" class="com.example.bean.Student">
+	<property name="name" value="小明"></property>
+	<property name="clazz" ref="clazzBean"></property>
+<!-- 	級聯屬性 -->
+	<property name="clazz.name" value="CIA103"></property>
+	</bean>
+	
+	<bean id="clazzBean" class="com.example.bean.Clazz"/>
+<!-- 		<bean id="clazzBean" class="com.example.bean.Clazz"> -->
+<!-- 		<property name="name" value="CIA103"></property> -->
+<!-- 		</bean> -->
+	<bean id="array" class="com.example.bean.Array">
+	<property name="hobbies">
+		<array>
+			<value>打球</value>
+			<value>聽歌</value>
+			<value>看電影</value>
+		</array>
+	</property>
+	</bean>
+	
+	
+</beans>

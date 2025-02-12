@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <!-- 这里定义你的 beans -->
+<bean id="listSet" class="com.example.bean.ListSet">
+<property name="names">
+	<list>
+		<value>張三</value>
+		<value>張三</value>
+		<value>張三</value>
+		<value>李四</value>
+		<value>王五</value>
+	</list>
+</property>
+<property name="address">
+	<set>
+	<value>台北</value>
+	<value>台北</value>
+	<value>台中</value>
+	<value>高雄</value>
+	<value>桃園</value>
+	</set>
+</property>
+
+<property name="phones">
+<map>
+<!-- 如果key value不是簡單類型 -->
+<!-- <entry key-ref="" value-ref=""/> -->
+<entry key="1" value="110"/>
+<entry key="2" value="120"/>
+<entry key="3" value="119"/>
+<entry key="1" value="120"/>
+</map>
+
+</property>
+</bean>
+	
+	
+</beans>
