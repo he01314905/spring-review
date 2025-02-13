@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+<bean id="husbandBean" class="com.circular.Husband" scope="singleton">
+<property name="name" value="張三"></property>
+<property name="wife" ref="wifeBean"></property>
+</bean>
+<bean id="wifeBean" class="com.circular.Wife" scope="singleton">
+<property name="name" value="小美"></property>
+<property name="husband" ref="husbandBean"></property>
+</bean>
+
+<bean id="b" scope="singleton" class="com.circular.Brother">
+<constructor-arg index="0" value="張四"></constructor-arg>
+<constructor-arg index="1" ref="s"></constructor-arg>
+</bean>
+<bean id="s" scope="singleton" class="com.circular.Sister">
+<constructor-arg index="0" value="小花"></constructor-arg>
+<constructor-arg index="1" ref="b"></constructor-arg>
+</bean>
+</beans>

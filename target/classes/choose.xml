@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--  怎麼選擇要作用的annotation 可以加use-defalut-filters 如果是false 包下帶有聲明bean的註解全失效 可以加 include-filter指定哪個annotation生效-->
+
+<context:component-scan base-package="com.annotation.bean2" use-default-filters="false">
+	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+
+<!-- use-defalut-filters=true 包下所有註解生效 這個是默認值 可以用exclude-filter 指定哪個不生效-->
+
+<!-- <context:component-scan base-package="com.annotation.bean2"> -->
+<!-- 	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/> -->
+<!-- </context:component-scan> -->
+</beans>
