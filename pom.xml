@@ -10,7 +10,11 @@
     <artifactId>spring-context</artifactId>
     <version>6.2.0</version>
 </dependency>
-
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-jdbc</artifactId>
+	<version>5.3.20</version>
+</dependency>
 <dependency>
 	<groupId>org.dom4j</groupId>
 	<artifactId>dom4j</artifactId>
@@ -46,5 +50,13 @@
 <artifactId>spring-aspects</artifactId>
 <version>5.3.20</version>
 </dependency>
+
+<dependency>
+<groupId>com.alibaba</groupId>
+<artifactId>druid</artifactId>
+<version>1.2.13</version>
+</dependency>
+
+
   </dependencies>
 </project>

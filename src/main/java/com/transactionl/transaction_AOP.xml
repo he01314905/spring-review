@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+         xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+                          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+<!-- 掃描包 -->
+<context:component-scan base-package="com.transactionl"/>
+<!-- 配置數據庫 -->
+<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+	<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+	<property name="url" value="jdbc:mysql://localhost:3306/spring6"/>
+	<property name="username" value="root"/>
+	<property name="password" value="root"/>
+</bean>
+
+<!-- 配置jdbcTemplate -->
+<bean id="jdbcTemplate" class="org.springframe.jdbc.core.JdbcTemplate">
+<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<!-- 配置事務管理器 -->
+<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<!-- 配置通知 -->
+<tx:advice id="txAdvice">
+<!-- 配置通知相關屬性 -->
+	<tx:attributes>
+<!-- 	事務屬性可在以下標籤中配置 -->
+	<tx:method name="要事務控制的方法(通常以模糊匹陪方式) save*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>
+	
+	</tx:attributes>
+	</tx:advice>
+<!-- 	配置切面 -->
+	<aop:config>
+<!-- 	配置切點 -->
+		<aop:pointcut expression="execution(* com.transactional..*(..))" id="txPointcut"/>
+<!-- 		切面=通知+切點 -->
+<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+	</aop:config>
+</beans>

@@ -12,6 +12,9 @@ Spring6使用JdbcTemplate,要使用DataSourceTransactionManager(Spring內建寫�
 
 2.聲明式事務 (1)注解式 (2)xml配置
 這邊利用jdbcTemplate示範
+
+---(半註解 半xml)---
+
 需要配置bean 
 <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 <property name="dataSource" ref="dataSource(你的數據源需有配置)"/>
@@ -21,8 +24,16 @@ Spring6使用JdbcTemplate,要使用DataSourceTransactionManager(Spring內建寫�
 
 tx命名空間須像context命名空間一樣新增
 
+---(全註解式)---
 
-Transation內有  
+寫一個Class 有@Configuration @ComponentScan("要掃描的包") @EnableTransactionManagement 開啟事務註解
+並且裡面要有@Bean這個聲明  測試程式 原先的ClassPathXmlApplicationContext 要改成 AnnotationConfigApplicationContext
+
+---(配置xml方式)---
+
+半註解半xml配置方式 最下面的 tx 註解驅動器改掉 變成Aop的方式進行 配通知 指定事務要管理的方法 配切面切點 
+
+@Transation內有  
 傳播行為 propagation,隔離級別 Isolation
 超時時間 timeout 默認-1 不限時
 rollbackFor 發生什麼事務回滾 noRollbackFor 發生什麼不回滾
@@ -51,3 +62,7 @@ SERIALIZABLE
 讀提交   	No       yes     yes
 可重複讀 	No       No      yes
 序列化  	No       No      No   (級別最高 不支持併發,排隊,效率最低)
+
+timeout 的時間 是指 事務中所有DML語句在超時時間內未完成的話事務回滾   
+當前事務,最後一句DML語句執行之前的時間 後面非DML語句,例如: 業務邏輯的程式碼 不算在超時時間
+
